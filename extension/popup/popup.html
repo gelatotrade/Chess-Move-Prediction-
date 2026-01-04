@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Move Predictor</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <!-- Header -->
+        <div class="popup-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L15 8H21L16 12L18 18L12 14L6 18L8 12L3 8H9L12 2Z" fill="#8B5CF6"/>
+                </svg>
+                <span>Chess Predictor</span>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Checking...</span>
+            </div>
+        </div>
+
+        <!-- Main Controls -->
+        <div class="popup-content">
+            <!-- Enable Toggle -->
+            <div class="control-section">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="enableToggle" checked>
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Enable Predictions</span>
+                </label>
+            </div>
+
+            <!-- Server Status -->
+            <div class="info-section" id="serverSection">
+                <div class="info-title">Server Status</div>
+                <div class="info-content" id="serverStatus">
+                    <div class="loading-spinner"></div>
+                    <span>Connecting...</span>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-section" id="statsSection" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-value" id="gamesAnalyzed">0</span>
+                    <span class="stat-label">Games Analyzed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="movesAnalyzed">0</span>
+                    <span class="stat-label">Moves Analyzed</span>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="settings-section">
+                <div class="settings-title">Settings</div>
+
+                <div class="setting-row">
+                    <label for="numMoves">Top Moves to Show</label>
+                    <select id="numMoves">
+                        <option value="3">3</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="setting-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="showArrows" checked>
+                        <span>Show Move Arrows</span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="showPanel" checked>
+                        <span>Show Side Panel</span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="autoUpdate" checked>
+                        <span>Auto-Update Predictions</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Server Config -->
+            <div class="server-config">
+                <div class="config-title">API Server</div>
+                <input type="text" id="serverUrl" value="http://localhost:8000" placeholder="Server URL">
+                <button id="testConnection" class="btn-secondary">Test Connection</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="popup-footer">
+            <a href="#" id="openDocs">Documentation</a>
+            <span class="version">v1.0.0</span>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
