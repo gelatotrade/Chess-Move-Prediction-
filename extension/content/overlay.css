@@ -1,0 +1,471 @@
+/**
+ * Chess Move Predictor - Overlay Styles
+ *
+ * Styles for the Chess.com overlay panel and visualizations.
+ */
+
+/* ============= Main Overlay Container ============= */
+
+#chess-predictor-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* ============= Side Panel ============= */
+
+#chess-predictor-panel {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 280px;
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    color: #e4e4e7;
+    z-index: 10000;
+    overflow: hidden;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+#chess-predictor-panel.minimized {
+    width: 200px;
+}
+
+#chess-predictor-panel.minimized .predictor-content {
+    display: none;
+}
+
+/* ============= Header ============= */
+
+.predictor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(139, 92, 246, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: move;
+}
+
+.predictor-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.predictor-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #8b5cf6;
+    border-radius: 50%;
+}
+
+.predictor-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 12px;
+}
+
+.predictor-status.connected {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+.predictor-status.disconnected {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.predictor-toggle {
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.2s;
+}
+
+.predictor-toggle:hover {
+    color: #fff;
+}
+
+/* ============= Content ============= */
+
+.predictor-content {
+    padding: 16px;
+}
+
+/* ============= Win Probability Section ============= */
+
+.win-probability-section {
+    margin-bottom: 16px;
+}
+
+.win-probability-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a1a1aa;
+    margin-bottom: 8px;
+}
+
+.win-probability-bar {
+    height: 8px;
+    background: #374151;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.win-probability-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #3b82f6);
+    border-radius: 4px;
+    transition: width 0.5s ease, background 0.3s ease;
+}
+
+.win-probability-value {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #22c55e;
+    transition: color 0.3s ease;
+}
+
+/* ============= Win Probability Chart ============= */
+
+.win-probability-chart {
+    height: 60px;
+    background: #1a1a2e;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.win-probability-chart canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============= Moves Section ============= */
+
+.moves-section {
+    margin-bottom: 16px;
+}
+
+.moves-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a1a1aa;
+    margin-bottom: 8px;
+}
+
+.moves-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.move-item {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 4px 8px;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.move-item:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateX(4px);
+}
+
+.move-rank {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.move-san {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.move-stats {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.move-prob {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.move-eval {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.move-eval.positive {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.move-eval.negative {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.move-win-bar {
+    grid-column: 1 / -1;
+    height: 3px;
+    background: #374151;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.move-win-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* ============= Settings Section ============= */
+
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #a1a1aa;
+    cursor: pointer;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #8b5cf6;
+    cursor: pointer;
+}
+
+.setting-item select {
+    background: #374151;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #e4e4e7;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.setting-item select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+}
+
+/* ============= Arrows ============= */
+
+.chess-predictor-arrow {
+    pointer-events: none;
+}
+
+/* ============= Square Highlights ============= */
+
+.chess-predictor-highlight {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 4px;
+    z-index: 5;
+}
+
+.chess-predictor-highlight.from {
+    background: rgba(139, 92, 246, 0.4);
+}
+
+.chess-predictor-highlight.to {
+    background: rgba(34, 197, 94, 0.4);
+}
+
+/* ============= Tooltips ============= */
+
+.predictor-tooltip {
+    position: absolute;
+    background: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #e4e4e7;
+    white-space: nowrap;
+    z-index: 10001;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* ============= Loading State ============= */
+
+.predictor-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.predictor-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============= Error State ============= */
+
+.predictor-error {
+    padding: 16px;
+    text-align: center;
+    color: #ef4444;
+    font-size: 13px;
+}
+
+.predictor-error button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #8b5cf6;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.predictor-error button:hover {
+    background: #7c3aed;
+}
+
+/* ============= Responsive ============= */
+
+@media (max-width: 1200px) {
+    #chess-predictor-panel {
+        right: 10px;
+        width: 240px;
+    }
+}
+
+@media (max-width: 900px) {
+    #chess-predictor-panel {
+        bottom: 20px;
+        top: auto;
+        right: 50%;
+        transform: translateX(50%);
+        width: calc(100% - 40px);
+        max-width: 400px;
+    }
+}
+
+/* ============= Dark Mode Overrides ============= */
+
+@media (prefers-color-scheme: dark) {
+    #chess-predictor-panel {
+        background: linear-gradient(145deg, #0f0f1a 0%, #1a1a2e 100%);
+    }
+}
+
+/* ============= Animation Classes ============= */
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ============= Best Move Indicator ============= */
+
+.best-move-badge {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.capture-badge {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.check-badge {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
